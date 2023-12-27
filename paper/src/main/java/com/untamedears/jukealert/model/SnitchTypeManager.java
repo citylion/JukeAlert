@@ -7,6 +7,7 @@ import com.untamedears.jukealert.model.appender.DormantCullingAppender;
 import com.untamedears.jukealert.model.appender.LeverToggleAppender;
 import com.untamedears.jukealert.model.appender.ShowOwnerOnDestroyAppender;
 import com.untamedears.jukealert.model.appender.SnitchLogAppender;
+import com.untamedears.jukealert.model.field.CurtainBiasedCubeRangeManager;
 import com.untamedears.jukealert.model.field.FieldManager;
 import com.untamedears.jukealert.model.field.SingleCuboidRangeManager;
 import com.untamedears.jukealert.model.field.VariableSizeCuboidRangeManager;
@@ -132,6 +133,10 @@ public class SnitchTypeManager {
 			int height = rangeSection.getInt("height");
 			logger.info("Parsed cuboid FieldManager with width " + width + " and height " + height);
 			return (s -> new VariableSizeCuboidRangeManager(width, height, s));
+		case "biasedcube":
+			int length = rangeSection.getInt("length");
+			logger.info("Parsed cuboid FieldManager with length " + length);
+			return (s -> new CurtainBiasedCubeRangeManager(length, s));
 		default:
 			logger.warning("Unknown range type " + type + " at " + rangeSection.getCurrentPath());
 			return null;
